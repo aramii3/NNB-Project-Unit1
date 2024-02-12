@@ -78,6 +78,7 @@ plt.show()
 
 
 a LIF model with voltage-gated sodium channel neuron
+This model shows a simple electric circuit where the neurons "battery" has a resting voltage that changes when it recieves a signal aka a current. When this reaches a certain threshold it triggers the neuron to fire an electrical pulse aka an action potential then it resets back to it's resting voltage. In this specific neuron there is a channel called a voltage gated sodium channel that opens when the membrane potential meets a certain threshold, once the gate channel is open it allos sodium ions to flood in and spike membrane potential. The benefits of this model are in it's simplicity and ease to understand, it is also good for large networks of neuron models and long-term models. It also has a good deal of real biological basis and is good for modeling real neurons. However, its limitations come in the fact that it is too simple to truly capture the complexitity of biological neurons and it cannot model everything a biological neuron would do or things like adaptations. This model aslo does not account for percise spike timing and it is very sensitive to it's parameters such as the time constant. This model is simple, easy to make and understand but it is not very complex and cannot hold the same about of bits of information as a more complex model. 
 
 
 ```python
@@ -390,8 +391,8 @@ model = NeuralNetwork(input_size, hidden_size, output_size)
 # Visualize the network architecture
 model.visualize()
 
-```
 
+```
 
     
 ![png](output_7_0.png)
@@ -401,9 +402,5 @@ model.visualize()
 
 ```python
 
-Cat Fact: The wealtheist cat in the world was named blackie and inherited 7 million dollars from his owner after hw died, However Taylor swifts cat has an estimated 97 million in assets!
-![image](https://github.com/aramii3/NNB-Project-Unit1/assets/156717176/dbd4b158-c544-4374-a256-7471925a236d)
-
-
-
 ```
+**Cat Fact**: The wealtheist cat in the world was named blackie and inherited 7 million dollars from his owner after he died, However Taylor swifts cat has an estimated 97 million in assets!
