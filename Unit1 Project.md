@@ -742,7 +742,7 @@ Shannon Entropy is defined as the amount of uncertainty involved in the value of
 
 In this equation, P(x) is the probability of the event x occurring. The sum of probabilities is taken over all of the possible events x in the sample space.
 
-Now that we have defined Shannoon Entropy, what does it mean in the context of information theory?
+Now that we have defined Shannon Entropy, what does it mean in the context of information theory?
 
 
 P(x) is the probability of the event x occurring. The sum is taken over all of the possible events x in the sample space.
