@@ -417,6 +417,22 @@ Overall, simple neural networks are the most complex and contain the most bits o
 
 The LIF model without voltage-gated sodium channels is more concise as it is the least complex. LIF models simply integrate signals and produce an action potential spike when threshold is met. Compared to the other two models that are able to integrate more information and better model the behavior of neural connections, the simple LIF model is the most concise as its computational capabilities are the simplest.
 
+What is Shannon Entropy? 
+Shannon Entropy is defined as the amount of uncertainty involved in the value of a random variable or process. It is represented using the equation below:
+
+P(x) is the probability of the event x occurring. The sum is taken over all of the possible events x in the sample space.
+What does entropy mean in the context of information theory? 
+In the context of information theory, entropy quantifies the uncertainty associated with a source/system of information. The higher the entropy, the more unpredictable the system is. This uncertainty is a result of the variability in the occurrence of different symbols or characters within the data. It becomes harder to predict the outcome of any event due to the diversity of symbols and characters present within the data. 
+Shannon entropy is calculated based on the average distribution of characters or symbols in the data source. Shannon entropy will take into account how often each character or symbol is present in the data. Shorter codes will be assigned to more frequent characters whereas longer codes will be assigned to less frequent characters, thereby achieving optimal efficiency. 
+How does this relate to encoding efficiency? 
+An encoding scheme is a method by which data is represented in a compact form. The efficiency of encoding schemes is determined by how far the data can be compressed while retaining all of its information. Shannon entropy provides a theoretical limit on the efficiency of encoding schemes, which is defined as the variable H. If there was high Shannon entropy within a source of information, there would be greater uncertainty and the encoding scheme would need to use more bits on average per symbol in order to retain all of the information. 
+Can you give a practical example? 
+Suppose we have a bag of 10 uniquely colored marbles, each having the same probability of being picked. What is the most efficient way to represent the color of each marble using bits? 
+Since there are 10 colors, we could potentially use 4 bits to represent all of the colors. 24= 16, which is greater than 10. However, this would be inefficient as we would have 6 unused states (16-10 = 6). 
+An alternative solution would be to group the marbles into sets of 3, and then assign bits to represent each set of marbles. With 3 marbles in each group, we will have 10^3 = 1000 possible combinations of colors. In order to represent 1000 combinations, we would need to calculate log2(1000), which is approximately 10 bits. With 10 bits, we are able to efficiently encode the color combination of the marbles. Because we grouped the marbles into sets of 3, each marble can be represented by 10/3 bits, which is approximately 3.333 bits. Ideally, the most efficient way to represent the number of color combinations would be log210 (3.32 bits), due to the fact that if we have n equally likely outcomes, the entropy will be log2(n) bits. 
+
+
+
 
 
 
