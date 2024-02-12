@@ -536,6 +536,10 @@ plt.show()
 
 ![png](project1q4pt1.png)
 
+
+In this example we changed the firing pattern of the presynaptic inputs so that the postsynaptic neuron receives a bursting pattern of inputs. Bursts of presynaptic activity can lead to varying patterns of postsynaptic responses depending on their frequency and timing. In the graph above, there is a bursting period of 200ms, where the neuron fires in a rapid and tonic pattern, followed by a 100ms quiescent period, where firing is paused while retaining the potential to resume firing upon stimuli. In terms of signal integration, bursting inputs may cause more pronounced depolarization and trigger action potentials more readily, which leads to altered postsynaptic firing patterns.
+
+
 ***What happens if graded potentials don't sum to threshold?***
 
 
