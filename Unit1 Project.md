@@ -736,7 +736,14 @@ plt.show()
 ***What is Shannon Entropy?***
 
 
-Shannon Entropy is defined as the amount of uncertainty involved in the value of a random variable or process. It is represented using the equation below:
+Shannon Entropy is defined as the amount of uncertainty involved in the value of a random variable or process. It is represented with the variable H using the equation below (retrieved from NEUR3002 In-Class Presentation #6 Slide 21):
+
+![png](entropy.png)
+
+In this equation, P(x) is the probability of the event x occurring. The sum of probabilities is taken over all of the possible events x in the sample space.
+
+Now that we have defined Shannoon Entropy, what does it mean in the context of information theory?
+
 
 P(x) is the probability of the event x occurring. The sum is taken over all of the possible events x in the sample space.
 What does entropy mean in the context of information theory?
