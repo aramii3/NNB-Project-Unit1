@@ -422,7 +422,9 @@ The LIF model without voltage-gated sodium channels is more concise as it is the
 
 
 
-## Part 4 - What if inputs to LIF model come in bursting patterns?
+## Part 4 - Varying Given Inputs to Updated LIF Model
+
+***What if inputs to LIF model come in bursting patterns?***
 
 ```python
 import numpy as np
