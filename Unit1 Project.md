@@ -1,5 +1,6 @@
 Group 3 - Alex Ramirez, Jackie Gore, Eva Duvaris, Steven Vacha, Ethan Chang
 
+**Part 2 - Neuron Models**
 ***LIF Neuron Model:***
 
 
@@ -400,7 +401,7 @@ model.visualize()
 ![png](output_7_0.png)
     
 
-***Model Comparisons:***
+***Part 3 - Model Descriptions/Comparisons:***
 
 
 An LIF model (Leaky integrate and fire model) is a model in which the behavior of a neuron is simulated as a measure of membrane potential over time. The benefits include its simplicity in implementation when attempting to model biological neuron behavior. Though simple in design, the LIF model can often oversimplify biological neuronal function and may fail to account for changes in threshold, synaptic plasticity, etc.
@@ -418,7 +419,8 @@ Overall, simple neural networks are the most complex and contain the most bits o
 The LIF model without voltage-gated sodium channels is more concise as it is the least complex. LIF models simply integrate signals and produce an action potential spike when threshold is met. Compared to the other two models that are able to integrate more information and better model the behavior of neural connections, the simple LIF model is the most concise as its computational capabilities are the simplest.
 
 
-***What if inputs to LIF model come in bursting patterns?***
+
+***Part 4 - What if inputs to LIF model come in bursting patterns?***
 
 ```python
 import numpy as np
@@ -646,8 +648,12 @@ plt.show()
 
 ![png](project1q4pt2.png)
 
+***Part 6 - Entropy***
+
 
 ***What is Shannon Entropy?***
+
+
 Shannon Entropy is defined as the amount of uncertainty involved in the value of a random variable or process. It is represented using the equation below:
 
 P(x) is the probability of the event x occurring. The sum is taken over all of the possible events x in the sample space.
