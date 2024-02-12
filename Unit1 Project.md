@@ -728,7 +728,8 @@ plt.title('With Inhibitory Inputs')
 plt.tight_layout()
 plt.show()
 ```
-
+![png](inhibitoryinputpic.png)
+In this first graph labeled without inhibitory inputs the LIF neuron is only given excitatory inputs and no inhibitory inputs. You can see the membrane potential increase in response to the excitation until it hits the threshold where it then fires a action potential and then resets and continues on this pattern. However, in the secound graph labeled with inhibitory input the LIF neuron is given both excitatory and inhibitory impluses. The inhibitory impulses hyperpolarize the membrane potential which makes it less likely to reach it's needed threshold voltage. This is what causes the rate of the action potentials the decrease and why you can see that the membrane potential looks different. In this graph the inhibitry input is given continously at every ms so you see that the action potentials have been cut in half. 
 
 ## Part 6 - Entropy
 
