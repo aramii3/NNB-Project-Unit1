@@ -1,4 +1,6 @@
-Group 3 - Alex Ramirez, Jackie Gore, Eva Duvaris, Steven Vacha, Ethan Chang
+# Unit 1 Project
+## Group 3 - Alex Ramirez, Jackie Gore, Eva Duvaris, Steven Vacha, Ethan Chang
+
 
 **Part 2 - Neuron Models**
 ***LIF Neuron Model:***
