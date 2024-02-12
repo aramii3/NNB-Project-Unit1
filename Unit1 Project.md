@@ -528,6 +528,7 @@ plt.show()
 
 ```
 
+![png](project1q4pt1.png)
 
 #Graded potentials that don't sum to threshold
 
@@ -643,7 +644,7 @@ plt.ylabel('Membrane Potential (mV)')
 plt.show()
 ```
 
-
+![png](project1q4pt2.png)
 
 
 What is Shannon Entropy? 
