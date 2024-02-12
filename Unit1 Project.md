@@ -401,4 +401,9 @@ model.visualize()
 
 ```python
 
+Cat Fact: The wealtheist cat in the world was named blackie and inherited 7 million dollars from his owner after hw died, However Taylor swifts cat has an estimated 97 million in assets!
+![image](https://github.com/aramii3/NNB-Project-Unit1/assets/156717176/dbd4b158-c544-4374-a256-7471925a236d)
+
+
+
 ```
