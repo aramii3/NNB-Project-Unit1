@@ -418,7 +418,7 @@ Overall, simple neural networks are the most complex and contain the most bits o
 The LIF model without voltage-gated sodium channels is more concise as it is the least complex. LIF models simply integrate signals and produce an action potential spike when threshold is met. Compared to the other two models that are able to integrate more information and better model the behavior of neural connections, the simple LIF model is the most concise as its computational capabilities are the simplest.
 
 
-4. Bursting Pattern
+What if inputs to LIF model come in bursting patterns?
 
 ```python
 import numpy as np
@@ -530,7 +530,7 @@ plt.show()
 
 ![png](project1q4pt1.png)
 
-#Graded potentials that don't sum to threshold
+What happens if graded potentials don't sum to threshold?
 
 
 ```python
