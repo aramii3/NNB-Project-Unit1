@@ -403,7 +403,7 @@ model.visualize()
 ![png](output_7_0.png)
     
 
-***Part 3 - Model Descriptions/Comparisons:***
+## Part 3 - Model Descriptions/Comparisons
 
 
 An LIF model (Leaky integrate and fire model) is a model in which the behavior of a neuron is simulated as a measure of membrane potential over time. The benefits include its simplicity in implementation when attempting to model biological neuron behavior. Though simple in design, the LIF model can often oversimplify biological neuronal function and may fail to account for changes in threshold, synaptic plasticity, etc.
@@ -422,7 +422,7 @@ The LIF model without voltage-gated sodium channels is more concise as it is the
 
 
 
-***Part 4 - What if inputs to LIF model come in bursting patterns?***
+## Part 4 - What if inputs to LIF model come in bursting patterns?
 
 ```python
 import numpy as np
@@ -650,7 +650,7 @@ plt.show()
 
 ![png](project1q4pt2.png)
 
-***Part 6 - Entropy***
+## Part 6 - Entropy
 
 
 ***What is Shannon Entropy?***
