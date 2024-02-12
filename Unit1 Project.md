@@ -652,6 +652,74 @@ plt.show()
 
 ![png](project1q4pt2.png)
 
+## Part 5 - Inhibitory Inputs ##
+
+```python
+import numpy as np
+import matplotlib.pyplot as plt
+from brian2 import *
+
+# Parameters
+tau = 10 * ms
+R = 100 * Mohm
+E_L = -70 * mV
+V_th = -55 * mV
+V_reset = -80 * mV
+V_na = 50 * mV  # Sodium channel reversal potential
+
+# Neuron model
+eqs = """
+dv/dt = (-(v - E_L) + R*I - R*I_Na)/tau : volt
+I_Na = g_Na*(v - V_na) : amp
+dg_Na/dt = -g_Na/tau_Na : siemens
+I : amp
+"""
+
+# Simulation parameters
+duration = 100 * ms
+num_neurons = 1
+
+# Create neuron group
+neurons = NeuronGroup(num_neurons, eqs, threshold='v>V_th', reset='v=V_reset', method='euler')
+
+# Initialize neuron parameters
+neurons.v = E_L
+neurons.I = 0 * amp
+neurons.g_Na = 0 * siemens
+
+# Monitoring
+mon_v = StateMonitor(neurons, 'v', record=True)
+spike_mon = SpikeMonitor(neurons)
+
+# Simulation without inhibitory inputs
+neurons.I = 1 * nA  # Excitatory input
+run(duration)
+
+# Plot without inhibitory inputs
+plt.figure(figsize=(10, 5))
+plt.subplot(1, 2, 1)
+plt.plot(mon_v.t/ms, mon_v.v[0]/mV)
+plt.xlabel('Time (ms)')
+plt.ylabel('Membrane potential (mV)')
+plt.title('Without Inhibitory Inputs')
+
+# Simulation with inhibitory inputs
+neurons.I = 1 * nA  # Excitatory input
+neurons.I_inhibitory = 0.5 * nA  # Inhibitory input
+run(duration)
+
+# Plot with inhibitory inputs
+plt.subplot(1, 2, 2)
+plt.plot(mon_v.t/ms, mon_v.v[0]/mV)
+plt.xlabel('Time (ms)')
+plt.ylabel('Membrane potential (mV)')
+plt.title('With Inhibitory Inputs')
+
+plt.tight_layout()
+plt.show()
+```
+
+
 ## Part 6 - Entropy
 
 
