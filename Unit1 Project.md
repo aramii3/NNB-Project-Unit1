@@ -744,10 +744,6 @@ In this equation, P(x) is the probability of the event x occurring. The sum of p
 
 Now that we have defined Shannon Entropy, what does it mean in the context of information theory?
 
-
-P(x) is the probability of the event x occurring. The sum is taken over all of the possible events x in the sample space.
-What does entropy mean in the context of information theory?
-
 In the context of information theory, entropy quantifies the uncertainty associated with a source/system of information. The higher the entropy, the more unpredictable the system is. This uncertainty is a result of the variability in the occurrence of different symbols or characters within the data. It becomes harder to predict the outcome of any event due to the diversity of symbols and characters present within the data. 
 Shannon entropy is calculated based on the average distribution of characters or symbols in the data source. Shannon entropy will take into account how often each character or symbol is present in the data. Shorter codes will be assigned to more frequent characters whereas longer codes will be assigned to less frequent characters, thereby achieving optimal efficiency. 
 
