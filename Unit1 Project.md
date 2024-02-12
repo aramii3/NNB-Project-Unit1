@@ -764,6 +764,31 @@ An alternative solution would be to group the marbles into sets of 3, and then a
 
 
 ```python
+def create_cat():
+    cat = r'''
+   /\_/\  
+  ( o.o ) 
+   > ^ <
+    '''
+    return cat
+
+def say_thank_you():
+    cat = create_cat()
+    message = "Thank you!"
+    lines = [""] * max(cat.count('\n'), message.count('\n'))
+
+    cat_lines = cat.split('\n')
+    message_lines = message.split('\n')
+
+    for i in range(len(lines)):
+        cat_line = cat_lines[i] if i < len(cat_lines) else ""
+        message_line = message_lines[i] if i < len(message_lines) else ""
+        lines[i] = f"{cat_line.ljust(15)} {message_line.center(10)}"
+
+    print("\n".join(lines))
+
+say_thank_you()
 
 ```
-**Cat Fact**: The wealtheist cat in the world was named blackie and inherited 7 million dollars from his owner after he died, However Taylor swifts cat has an estimated 97 million in assets!
+
+**Cat Fact**: The wealtheist cat in the world was named blackie and inherited 7 million dollars from his owner after he died; however, Taylor Swift's cat has an estimated 97 million in assets!
