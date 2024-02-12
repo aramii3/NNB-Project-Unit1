@@ -25,9 +25,11 @@ class LIFNeuron:
     def update(self, dt, current_input):
         # Check if the neuron is in a refractory period
         if self.refractory_time > 0:
-            # Neuron is in refractory period, reset membrane potential to resting potential
+            # Neuron is in refractory period, decrement refractory time
             self.refractory_time -= dt
-            self.membrane_potential = self.v_rest
+            if self.refractory_time <= 0:
+                # Refractory period over, reset membrane potential to resting potential
+                self.membrane_potential = self.v_rest
         else:
             # Update membrane potential using leaky integration
             dv = (-(self.membrane_potential - self.v_rest) + current_input) / self.tau_m * dt
@@ -42,7 +44,7 @@ class LIFNeuron:
 
         # Return the updated membrane potential
         return self.membrane_potential
-    
+
 # Simulation parameters
 tau_m = 10.0  # Membrane time constant (ms)
 tau_ref = 2.0  # Refractory period (ms)
@@ -60,7 +62,7 @@ membrane_potentials = []
 
 for t in time_points:
     # Inject a constant input current for demonstration purposes
-    input_current = 10.0 if t < 50 else 0.0
+    input_current = 10.0 if t < 50 or 70 < t < 90 else 0.0
 
     # Update neuron and store membrane potential
     membrane_potential = neuron.update(dt, input_current)
@@ -68,10 +70,11 @@ for t in time_points:
 
 # Plot results
 plt.plot(time_points, membrane_potentials)
-plt.title('Leaky Integrate-and-Fire Neuron Simulation')
+plt.title('Leaky Integrate-and-Fire Neuron Simulation with Multiple Spikes')
 plt.xlabel('Time (ms)')
 plt.ylabel('Membrane Potential (mV)')
 plt.show()
+
 ```
 
 
@@ -139,8 +142,8 @@ class LIFNeuron:
 
             # Check for threshold crossing
             if self.membrane_potential >= self.v_thresh:
-                # Neuron has fired, reset membrane potential to resting potential
-                self.membrane_potential = self.v_rest
+                # Neuron has fired, reset membrane potential to resting potential with overshoot
+                self.membrane_potential = self.v_rest + 30
                 # Set refractory period
                 self.refractory_time = self.tau_ref
 
@@ -186,6 +189,7 @@ plt.title('Leaky Integrate-and-Fire Neuron with Sodium Channel (Multiple Spikes)
 plt.xlabel('Time (ms)')
 plt.ylabel('Membrane Potential (mV)')
 plt.show()
+
 
 ```
 
