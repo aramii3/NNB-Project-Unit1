@@ -657,62 +657,72 @@ plt.show()
 ```python
 import numpy as np
 import matplotlib.pyplot as plt
-from brian2 import *
 
 # Parameters
-tau = 10 * ms
-R = 100 * Mohm
-E_L = -70 * mV
-V_th = -55 * mV
-V_reset = -80 * mV
-V_na = 50 * mV  # Sodium channel reversal potential
+Cm = 1.0  # Membrane capacitance (uF/cm^2)
+gL = 0.1  # Leak conductance (mS/cm^2)
+EL = -65  # Leak reversal potential (mV)
+ENa = 55  # Sodium reversal potential (mV)
+gNa_max = 35  # Maximum sodium conductance (mS/cm^2)
+Vt = -55  # Threshold voltage (mV)
+Vr = -65  # Reset voltage (mV)
+I_exc = 10  # Excitatory input current (nA)
+I_inh = 5  # Inhibitory input current (nA)
+dt = 0.01  # Time step (ms)
+t_max = 50  # Maximum time (ms)
 
-# Neuron model
-eqs = """
-dv/dt = (-(v - E_L) + R*I - R*I_Na)/tau : volt
-I_Na = g_Na*(v - V_na) : amp
-dg_Na/dt = -g_Na/tau_Na : siemens
-I : amp
-"""
+# Initialize variables
+t = np.arange(0, t_max + dt, dt)
+V_no_inh = np.zeros(len(t))
+V_with_inh = np.zeros(len(t))
+m = np.zeros(len(t))
+h = np.zeros(len(t))
+V_no_inh[0] = Vr
+V_with_inh[0] = Vr
 
-# Simulation parameters
-duration = 100 * ms
-num_neurons = 1
+# Simulate the LIF neuron with voltage-gated sodium channels
+for i in range(1, len(t)):
+    # Update sodium channel gating variables using Hodgkin-Huxley model
+    alpha_m = 0.1 * (V_no_inh[i-1] + 40) / (1 - np.exp(-(V_no_inh[i-1] + 40) / 10))
+    beta_m = 4 * np.exp(-(V_no_inh[i-1] + 65) / 18)
+    alpha_h = 0.07 * np.exp(-(V_no_inh[i-1] + 65) / 20)
+    beta_h = 1 / (1 + np.exp(-(V_no_inh[i-1] + 35) / 10))
+    m[i] = m[i-1] + dt * (alpha_m * (1 - m[i-1]) - beta_m * m[i-1])
+    h[i] = h[i-1] + dt * (alpha_h * (1 - h[i-1]) - beta_h * h[i-1])
 
-# Create neuron group
-neurons = NeuronGroup(num_neurons, eqs, threshold='v>V_th', reset='v=V_reset', method='euler')
+    # Calculate sodium current without inhibitory input
+    INa_no_inh = gNa_max * m[i]**3 * h[i] * (V_no_inh[i-1] - ENa)
 
-# Initialize neuron parameters
-neurons.v = E_L
-neurons.I = 0 * amp
-neurons.g_Na = 0 * siemens
+    # Update membrane potential without inhibitory input
+    V_no_inh[i] = V_no_inh[i-1] + dt * ((I_exc - gL * (V_no_inh[i-1] - EL) - INa_no_inh) / Cm)
 
-# Monitoring
-mon_v = StateMonitor(neurons, 'v', record=True)
-spike_mon = SpikeMonitor(neurons)
+    # Calculate sodium current with inhibitory input
+    INa_with_inh = gNa_max * m[i]**3 * h[i] * (V_with_inh[i-1] - ENa)
 
-# Simulation without inhibitory inputs
-neurons.I = 1 * nA  # Excitatory input
-run(duration)
+    # Update membrane potential with inhibitory input
+    V_with_inh[i] = V_with_inh[i-1] + dt * (((I_exc - I_inh) - gL * (V_with_inh[i-1] - EL) - INa_with_inh) / Cm)
 
-# Plot without inhibitory inputs
+    # Check for spike without inhibitory input
+    if V_no_inh[i] >= Vt:
+        V_no_inh[i] = Vr
+
+    # Check for spike with inhibitory input
+    if V_with_inh[i] >= Vt:
+        V_with_inh[i] = Vr
+
+# Plot membrane potential without inhibitory input
 plt.figure(figsize=(10, 5))
 plt.subplot(1, 2, 1)
-plt.plot(mon_v.t/ms, mon_v.v[0]/mV)
+plt.plot(t, V_no_inh)
 plt.xlabel('Time (ms)')
-plt.ylabel('Membrane potential (mV)')
+plt.ylabel('Membrane Potential (mV)')
 plt.title('Without Inhibitory Inputs')
 
-# Simulation with inhibitory inputs
-neurons.I = 1 * nA  # Excitatory input
-neurons.I_inhibitory = 0.5 * nA  # Inhibitory input
-run(duration)
-
-# Plot with inhibitory inputs
+# Plot membrane potential with inhibitory input
 plt.subplot(1, 2, 2)
-plt.plot(mon_v.t/ms, mon_v.v[0]/mV)
+plt.plot(t, V_with_inh)
 plt.xlabel('Time (ms)')
-plt.ylabel('Membrane potential (mV)')
+plt.ylabel('Membrane Potential (mV)')
 plt.title('With Inhibitory Inputs')
 
 plt.tight_layout()
