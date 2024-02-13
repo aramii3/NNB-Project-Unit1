@@ -199,7 +199,7 @@ plt.show()
     
 
 
-***Simple nueral network model - open loop model***
+***Simple Neural Network Model - Open Loop Model***
 
 
 ```python
