@@ -70,16 +70,18 @@ for t in time_points:
 
 # Plot results
 plt.plot(time_points, membrane_potentials)
+plt.axhline(y=v_thresh, color='r', linestyle='--')  # Add a dotted line across the threshold
 plt.title('Leaky Integrate-and-Fire Neuron Simulation with Multiple Spikes')
 plt.xlabel('Time (ms)')
 plt.ylabel('Membrane Potential (mV)')
 plt.show()
 
+
 ```
 
 
     
-![png](output_0_0.png)
+![png](output_LIF_.png)
     
 
 
@@ -142,7 +144,7 @@ class LIFNeuron:
 
             # Check for threshold crossing
             if self.membrane_potential >= self.v_thresh:
-                # Neuron has fired, reset membrane potential to resting potential with overshoot
+                # Neuron has fired, reset membrane potential to exactly +30mV
                 self.membrane_potential = self.v_rest + 30
                 # Set refractory period
                 self.refractory_time = self.tau_ref
@@ -185,14 +187,7 @@ for t in time_points:
 
 # Plot results
 plt.plot(time_points, membrane_potentials)
-plt.title('Leaky Integrate-and-Fire Neuron with Sodium Channel (Multiple Spikes)')
-plt.xlabel('Time (ms)')
-plt.ylabel('Membrane Potential (mV)')
-plt.show()
-
-# Plot results
-plt.plot(time_points, membrane_potentials)
-plt.axhline(y=-55, color='r', linestyle='--')  # Add the horizontal red dotted line at -55 mV
+plt.axhline(y=v_thresh, color='r', linestyle='--')  # Add a dotted line across the threshold
 plt.title('Leaky Integrate-and-Fire Neuron with Sodium Channel (Multiple Spikes)')
 plt.xlabel('Time (ms)')
 plt.ylabel('Membrane Potential (mV)')
@@ -202,7 +197,7 @@ plt.show()
 
 
     
-![png](output_1_0.png)
+![png](output_LIFSO_.png)
     
 
 
