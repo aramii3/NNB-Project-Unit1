@@ -536,9 +536,126 @@ plt.xlabel('Time (ms)')
 plt.ylabel('Membrane Potential (mV)')
 plt.show()
 
+import numpy as np
+import matplotlib.pyplot as plt
+
+class LIFNeuron:
+    def __init__(self, tau_m, tau_ref, v_rest, v_thresh, sodium_channel_params):
+        # Neuron parameters
+        self.tau_m = tau_m  # Membrane time constant
+        self.tau_ref = tau_ref  # Refractory period
+        self.v_rest = v_rest  # Resting potential
+        self.v_thresh = v_thresh  # Threshold potential
+
+        # Sodium channel parameters
+        self.sodium_channel_params = sodium_channel_params
+        self.m = 0.0  # Initial activation variable
+        self.h = 1.0  # Initial inactivation variable
+
+        # Neuron state variables
+        self.membrane_potential = v_rest  # Initial membrane potential
+        self.refractory_time = 0  # Initial refractory time
+
+    def update_sodium_channel(self, dt):
+        # Update sodium channel dynamics using Hodgkin-Huxley model
+        alpha_m = self.sodium_channel_params['alpha_m'](self.membrane_potential)
+        beta_m = self.sodium_channel_params['beta_m'](self.membrane_potential)
+        alpha_h = self.sodium_channel_params['alpha_h'](self.membrane_potential)
+        beta_h = self.sodium_channel_params['beta_h'](self.membrane_potential)
+
+        dm_dt = alpha_m * (1 - self.m) - beta_m * self.m
+        dh_dt = alpha_h * (1 - self.h) - beta_h * self.h
+
+        self.m += dm_dt * dt
+        self.h += dh_dt * dt
+
+    def update(self, dt, current_input):
+        # Check if the neuron is in a refractory period
+        if self.refractory_time > 0:
+            # Neuron is in refractory period, reset membrane potential to resting potential
+            self.refractory_time -= dt
+            self.membrane_potential = self.v_rest
+        else:
+            # Update sodium channel dynamics
+            self.update_sodium_channel(dt)
+
+            # Update membrane potential using leaky integration and sodium channel contribution
+            dv = (-(self.membrane_potential - self.v_rest) + current_input + \
+                  self.sodium_channel_params['g_Na'] * self.m**3 * self.h * \
+                  (self.sodium_channel_params['E_Na'] - self.membrane_potential)) / self.tau_m * dt
+
+            self.membrane_potential += dv
+
+            # Check for threshold crossing
+            if self.membrane_potential >= self.v_thresh:
+                # Neuron has fired, reset membrane potential to resting potential
+                self.membrane_potential = self.v_rest
+                # Set refractory period
+                self.refractory_time = self.tau_ref
+
+        # Return the updated membrane potential
+        return self.membrane_potential
+
+# Sodium channel parameters (Hodgkin-Huxley model)
+sodium_channel_params = {
+    'alpha_m': lambda v: 0.1 * (v + 40) / (1 - np.exp(-(v + 40) / 10)),
+    'beta_m': lambda v: 4.0 * np.exp(-(v + 65) / 18),
+    'alpha_h': lambda v: 0.07 * np.exp(-(v + 65) / 20),
+    'beta_h': lambda v: 1.0 / (1 + np.exp(-(v + 35) / 10)),
+    'g_Na': 120.0,  # Sodium conductance (mS/cm^2)
+    'E_Na': 50.0,   # Sodium reversal potential (mV)
+}
+
+# Simulation parameters
+tau_m = 10.0  # Membrane time constant (ms)
+tau_ref = 2.0  # Refractory period (ms)
+v_rest = -70.0  # Resting potential (mV)
+v_thresh = -55.0  # Threshold potential (mV)
+dt = 0.1  # Time step (ms)
+sim_time = 1000  # Simulation time (ms)
+burst_period = 200  # Burst period (ms)
+quiescent_period = 100  # Quiescent period (ms)
+
+# Create LIF neuron with sodium channels for bursting pattern
+bursting_neuron = LIFNeuron(tau_m, tau_ref, v_rest, v_thresh, sodium_channel_params)
+
+# Create LIF neuron with sodium channels for normal firing pattern
+normal_neuron = LIFNeuron(tau_m, tau_ref, v_rest, v_thresh, sodium_channel_params)
+
+# Simulation loop
+time_points = np.arange(0, sim_time, dt)
+bursting_membrane_potentials = []
+normal_membrane_potentials = []
+
+for t in time_points:
+    # Determine input current based on bursting or quiescent period
+    if t % (burst_period + quiescent_period) < burst_period:
+        bursting_input_current = 10.0  # High input current during bursting period
+    else:
+        bursting_input_current = 0.0  # No input current during quiescent period
+
+    # Update bursting neuron and store membrane potential
+    bursting_membrane_potential = bursting_neuron.update(dt, bursting_input_current)
+    bursting_membrane_potentials.append(bursting_membrane_potential)
+
+    # Update normal firing neuron with constant input current
+    normal_input_current = 10.0  # Constant input current for normal firing
+    normal_membrane_potential = normal_neuron.update(dt, normal_input_current)
+    normal_membrane_potentials.append(normal_membrane_potential)
+
+# Plot results
+plt.plot(time_points, bursting_membrane_potentials, label='Bursting Neuron', color='blue')
+plt.plot(time_points, normal_membrane_potentials, label='Normal Firing Neuron', color='black', linestyle='--')
+plt.title('Leaky Integrate-and-Fire Neurons with Sodium Channels')
+plt.xlabel('Time (ms)')
+plt.ylabel('Membrane Potential (mV)')
+plt.legend()
+plt.show()
+
 ```
 
 ![png](project1q4pt1.png)
+
 
 
 In this example we changed the firing pattern of the presynaptic inputs so that the postsynaptic neuron receives a bursting pattern of inputs. Bursts of presynaptic activity can lead to varying patterns of postsynaptic responses depending on their frequency and timing. In the graph above, there is a bursting period of 200ms, where the neuron fires in a rapid and tonic pattern, followed by a 100ms quiescent period, where firing is paused while retaining the potential to resume firing upon stimuli. In terms of signal integration, bursting inputs may cause more pronounced depolarization and trigger action potentials more readily, which leads to altered postsynaptic firing patterns.
@@ -548,6 +665,7 @@ In this example we changed the firing pattern of the presynaptic inputs so that 
 
 
 ```python
+#Graded potentials that don't sum to threshold
 import numpy as np
 import matplotlib.pyplot as plt
 
@@ -655,6 +773,36 @@ plt.plot(time_points, membrane_potentials)
 plt.title('Leaky Integrate-and-Fire Neuron with Sodium Channel (Hyperpolarization at Beginning)')
 plt.xlabel('Time (ms)')
 plt.ylabel('Membrane Potential (mV)')
+plt.show()
+
+# Define parameters for the regular firing neuron
+regular_firing_params = {
+    'tau_m': 10.0,  # Membrane time constant (ms)
+    'tau_ref': 2.0,  # Refractory period (ms)
+    'v_rest': -70.0,  # Resting potential (mV)
+    'v_thresh': -55.0,  # Threshold potential (mV)
+    'sodium_channel_params': sodium_channel_params
+}
+
+# Create regular firing neuron
+regular_firing_neuron = LIFNeuron(**regular_firing_params)
+
+# Simulation loop for regular firing neuron
+regular_firing_membrane_potentials = []
+
+for t in time_points:
+    # Apply constant input current
+    input_current = 10.0
+    membrane_potential = regular_firing_neuron.update(dt, input_current)
+    regular_firing_membrane_potentials.append(membrane_potential)
+
+# Plot results
+plt.plot(time_points, membrane_potentials, label='Bursting Neuron')  # Plot bursting neuron
+plt.plot(time_points, regular_firing_membrane_potentials, label='Regular Firing Neuron', color='green')  # Plot regular firing neuron
+plt.title('Leaky Integrate-and-Fire Neurons')
+plt.xlabel('Time (ms)')
+plt.ylabel('Membrane Potential (mV)')
+plt.legend()
 plt.show()
 ```
 
