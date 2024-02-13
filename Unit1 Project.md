@@ -68,7 +68,13 @@ for t in time_points:
     membrane_potential = neuron.update(dt, input_current)
     membrane_potentials.append(membrane_potential)
 
-
+# Plot results
+plt.plot(time_points, membrane_potentials)
+plt.axhline(y=-60, color='r', linestyle='--')  # Add the horizontal red dotted line at -60 mV
+plt.title('Leaky Integrate-and-Fire Neuron')
+plt.xlabel('Time (ms)')
+plt.ylabel('Membrane Potential (mV)')
+plt.show()
 
 ```
 
