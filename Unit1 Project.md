@@ -663,15 +663,6 @@ plt.ylabel('Membrane Potential (mV)')
 plt.legend()
 plt.show()
 
-# Plot results for normal firing neuron
-plt.plot(time_points, normal_membrane_potentials, label='Normal Firing Neuron', color='black', linestyle='--')
-plt.axhline(y=-55, color='r', linestyle='--')  # Add the horizontal red dotted line at -55 mV
-plt.title('Leaky Integrate-and-Fire Neurons with Sodium Channels (Normal Firing Pattern)')
-plt.xlabel('Time (ms)')
-plt.ylabel('Membrane Potential (mV)')
-plt.legend()
-plt.show()
-
 ```
 
 ![png](output_burst.png)
