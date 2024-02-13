@@ -68,13 +68,6 @@ for t in time_points:
     membrane_potential = neuron.update(dt, input_current)
     membrane_potentials.append(membrane_potential)
 
-# Plot results
-plt.plot(time_points, membrane_potentials)
-plt.axhline(y=v_thresh, color='r', linestyle='--')  # Add a dotted line across the threshold
-plt.title('Leaky Integrate-and-Fire Neuron Simulation with Multiple Spikes')
-plt.xlabel('Time (ms)')
-plt.ylabel('Membrane Potential (mV)')
-plt.show()
 
 
 ```
