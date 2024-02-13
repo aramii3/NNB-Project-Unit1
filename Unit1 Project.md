@@ -678,6 +678,7 @@ for t in time_points:
 
 # Plot results
 plt.plot(time_points, membrane_potentials)
+plt.axhline(y=-62.5, color='r', linestyle='--')  # Add the horizontal dotted line at -62.5 mV
 plt.title('Leaky Integrate-and-Fire Neuron with Sodium Channel (Hyperpolarization at Beginning)')
 plt.xlabel('Time (ms)')
 plt.ylabel('Membrane Potential (mV)')
@@ -707,15 +708,13 @@ for t in time_points:
 # Plot results
 plt.plot(time_points, membrane_potentials, label='Bursting Neuron')  # Plot bursting neuron
 plt.plot(time_points, regular_firing_membrane_potentials, label='Regular Firing Neuron', color='green')  # Plot regular firing neuron
-plt.title('Leaky Integrate-and-Fire Neurons')
-plt.xlabel('Time (ms)')
-plt.ylabel('Membrane Potential (mV)')
-plt.legend()
-plt.show()
+plt.axhline(y=-62.5, color='r', linestyle='--')  # Add the horizontal dotted line at -62.5 mV
+
 ```
 
-![png](output_begin.png)
-![png](output_begin_burst.png)
+![image](https://github.com/aramii3/NNB-Project-Unit1/assets/156377831/01ebe4a2-3062-47fd-8fed-2e15a304b9fb)
+![image](https://github.com/aramii3/NNB-Project-Unit1/assets/156377831/c1f5b736-5f8f-46da-af77-23a2cf13a683)
+
 
 In the updated LIF model, if the inputs do not sum to reach the firing threshold, the postsynaptic neuron will not generate an action potential/spike. When the postsynaptic neuron integrates its synaptic inputs over time, each input has its own weight, which represents its effectiveness in depolarizing or hyperpolarizing the neuron’s membrane potential. If the integrated effect of the inputs causes the membrane potential to reach/exceed the neuron’s firing threshold, which is typically a fixed value in the LIF model, an action potential is generated. In the model above, the green firing pattern shows a normal LIF pattern where the synaptic inputs add to threshold value and generate rhythmic repetitive firing. The blue firing pattern shows a neuron where synaptic inputs only sum to threshold at around 300-350ms and 750-800ms, where spikes are generated. Elsewhere during synaptic input integration, the inputs were not able to sum to threshold to generate an action potential.
 
