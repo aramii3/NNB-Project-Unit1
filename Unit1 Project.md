@@ -79,8 +79,7 @@ plt.show()
 ```
 
 
-    
-![png](output_LIF_.png)
+![image](https://github.com/aramii3/NNB-Project-Unit1/assets/156377831/8d9022d9-a87e-4fb0-a9e4-7cab413ae7fd)
     
 
 
