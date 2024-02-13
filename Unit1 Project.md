@@ -190,6 +190,13 @@ plt.xlabel('Time (ms)')
 plt.ylabel('Membrane Potential (mV)')
 plt.show()
 
+# Plot results
+plt.plot(time_points, membrane_potentials)
+plt.axhline(y=-55, color='r', linestyle='--')  # Add the horizontal red dotted line at -55 mV
+plt.title('Leaky Integrate-and-Fire Neuron with Sodium Channel (Multiple Spikes)')
+plt.xlabel('Time (ms)')
+plt.ylabel('Membrane Potential (mV)')
+plt.show()
 
 ```
 
