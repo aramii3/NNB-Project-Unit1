@@ -872,6 +872,7 @@ for i in range(1, len(t)):
 plt.figure(figsize=(10, 5))
 plt.subplot(1, 2, 1)
 plt.plot(t, V_no_inh)
+plt.axhline(y=Vt, color='r', linestyle='--')  # Add threshold line
 plt.xlabel('Time (ms)')
 plt.ylabel('Membrane Potential (mV)')
 plt.title('Without Inhibitory Inputs')
@@ -879,6 +880,7 @@ plt.title('Without Inhibitory Inputs')
 # Plot membrane potential with inhibitory input
 plt.subplot(1, 2, 2)
 plt.plot(t, V_with_inh)
+plt.axhline(y=Vt, color='r', linestyle='--')  # Add threshold line
 plt.xlabel('Time (ms)')
 plt.ylabel('Membrane Potential (mV)')
 plt.title('With Inhibitory Inputs')
