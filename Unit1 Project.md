@@ -654,7 +654,8 @@ plt.show()
 
 ```
 
-![png](project1q4pt1.png)
+![png](output_burst.png)
+![png](output_burst_normal.png)
 
 
 
@@ -806,7 +807,8 @@ plt.legend()
 plt.show()
 ```
 
-![png](project1q4pt2.png)
+![png](begin.png)
+![png](begin_burst.png)
 
 ## Part 5 - Inhibitory Inputs ##
 
