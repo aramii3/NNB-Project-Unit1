@@ -670,7 +670,8 @@ plt.show()
 
 
 
-In this example we changed the firing pattern of the presynaptic inputs so that the postsynaptic neuron receives a bursting pattern of inputs. Bursts of presynaptic activity can lead to varying patterns of postsynaptic responses depending on their frequency and timing. In the graph above, there is a bursting period of 200ms, where the neuron fires in a rapid and tonic pattern, followed by a 100ms quiescent period, where firing is paused while retaining the potential to resume firing upon stimuli. In terms of signal integration, bursting inputs may cause more pronounced depolarization and trigger action potentials more readily, which leads to altered postsynaptic firing patterns.
+In this example we changed the firing pattern of the presynaptic inputs so that the postsynaptic neuron receives a bursting pattern of inputs. Bursts of presynaptic activity can lead to varying patterns of postsynaptic responses depending on their frequency and timing. In the graph above, the normal firing pattern (in dotted black) is a consistent tonic pattern without any cyclical trends. In the updated system (blue lines) there is a bursting period of 200ms, where the neuron fires in a rapid and tonic pattern, followed by a 100ms quiescent period, where firing is paused while retaining the potential to resume firing upon stimuli. This creates a cyclic bursting firing pattern of the postsynaptic neuron. In terms of signal integration, bursting inputs may cause more pronounced depolarization and trigger action potentials more readily, which leads to altered postsynaptic firing patterns.
+
 
 
 ***What happens if graded potentials don't sum to threshold?***
@@ -821,6 +822,9 @@ plt.show()
 ![png](output_begin.png)
 ![png](output_begin_burst.png)
 
+In the updated LIF model, if the inputs do not sum to reach the firing threshold, the postsynaptic neuron will not generate an action potential/spike. When the postsynaptic neuron integrates its synaptic inputs over time, each input has its own weight, which represents its effectiveness in depolarizing or hyperpolarizing the neuron’s membrane potential. If the integrated effect of the inputs causes the membrane potential to reach/exceed the neuron’s firing threshold, which is typically a fixed value in the LIF model, an action potential is generated. In the model above, the green firing pattern shows a normal LIF pattern where the synaptic inputs add to threshold value and generate rhythmic repetitive firing. The blue firing pattern shows a neuron where synaptic inputs only sum to threshold at around 300-350ms and 750-800ms, where spikes are generated. Elsewhere during synaptic input integration, the inputs were not able to sum to threshold to generate an action potential.
+
+
 ## Part 5 - Inhibitory Inputs ##
 
 ```python
@@ -962,5 +966,10 @@ def say_thank_you():
 say_thank_you()
 
 ```
+Thank you!
+   /\_/\                  
+  ( o.o )                 
+   > ^ <
+
 
 **Cat Fact**: The wealtheist cat in the world was named blackie and inherited 7 million dollars from his owner after he died; however, Taylor Swift's cat has an estimated 97 million in assets!
