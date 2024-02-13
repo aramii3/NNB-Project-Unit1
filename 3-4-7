@@ -352,7 +352,7 @@ for t in time_points:
     regular_firing_membrane_potentials.append(membrane_potential)
 
 # Plot results
-plt.plot(time_points, membrane_potentials, label='Bursting Neuron')  # Plot bursting neuron
+plt.plot(time_points, membrane_potentials, label='Inhibitory Inputs')  # Plot bursting neuron
 plt.plot(time_points, regular_firing_membrane_potentials, label='Regular Firing Neuron', color='green')  # Plot regular firing neuron
 plt.title('Leaky Integrate-and-Fire Neurons')
 plt.xlabel('Time (ms)')
