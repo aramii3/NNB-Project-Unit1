@@ -807,8 +807,8 @@ plt.legend()
 plt.show()
 ```
 
-![png](begin.png)
-![png](begin_burst.png)
+![png](output_begin.png)
+![png](output_begin_burst.png)
 
 ## Part 5 - Inhibitory Inputs ##
 
